@@ -1,0 +1,125 @@
+html, body{
+    margin: 0;
+    padding: 0;
+    font-family: 'Playfair Display', serif;
+}
+.title-main{
+    font-size: 32px;
+    font-weight: 400;
+}
+.news-title{
+    font-size: 22px;
+    font-weight: 400;
+    margin: 0;
+}
+.container{
+  width: auto;  
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+.news-display-section{
+    padding: 20px 0;
+    background-color: aquamarine;
+    text-align: center;
+}
+.news-display-wrapper{
+    text-align: center;
+    background-color: #fff;
+}
+.news-listing-wrapper{
+    padding: 15px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.form-search{
+    padding: 30px 15px 10px 15px;
+    margin-bottom: 0;
+}
+.search-input{
+    width: 100%;
+    height: 40px;
+    border: 1px solid #93f1d5;
+}
+.news-list-item{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    margin-bottom: 15px;
+    padding: 15px;
+}
+.news-img{
+    width: 100%;
+    height: 150px;
+    background-color: aquamarine;
+}
+.news-img img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.news-details{
+    padding: 0;
+    text-align: left;
+}
+
+@media(min-width: 768px){
+    .container{
+        width: 750px;
+    }
+    .form-search{
+        margin-bottom: 0;
+        margin-right: auto;
+        margin-left: auto;
+    }
+    .news-list-item{
+        flex-direction: column;
+        align-items: start;
+        width: 45%;
+        padding: 15px;
+    }
+    .news-img{
+        margin-right: 20px;
+    }
+
+    .news-title{
+        font-size: 24px;
+        padding: 0px;
+        margin-top: 15px;
+    }
+    .form-search{
+        padding: 60px 15px 0 15px;
+    }
+    .news-img{
+        width: 150px;
+        min-width: 150px;
+        height: 150px;
+    }
+}
+@media(min-width: 992px){
+    .container{
+        width: 970px
+    }
+    .news-title{
+        font-size: 38px;
+    }
+    .news-list-item{
+        flex-direction: row;
+        align-items: center;
+        width: 100%;
+    }
+    .news-title{
+        padding: 15px;
+    }
+    .form-search{
+        max-width: 75%;
+    }
+}
+@media(min-width: 1200px){
+    .container{
+        width: 1170px
+    }
+}
