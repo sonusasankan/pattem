@@ -1,20 +1,20 @@
-var page = 1;
-var pageSize = 10
-var query = "bitcoin";
-var url =  '';
-var query_string = url.search;
-var search_params = new URLSearchParams(query_string); 
+let page = 1;
+let pageSize = 10
+let query = "bitcoin";
+let url =  '';
+let query_string = url.search;
+let search_params = new URLSearchParams(query_string); 
 let root = document.getElementById("news")  
 
 
 function loadDoc() {
     url = new URL("https://newsapi.org/v2/everything?q="+query+"&apiKey=0503377bfa6c4bde92bc48232a90f047&pageSize="+pageSize+"&page="+page+"");
-    var xhttp = new XMLHttpRequest();
+    let xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
         let data = JSON.parse(this.responseText);
         var output = '';
-        for(var i in data.articles){
+        for(let i in data.articles){
             output += '<div class="news-list-item">'+
             '<div class="news-img">'+ 
             '<img src="'+ data.articles[i].urlToImage +'" />'+
@@ -50,13 +50,16 @@ setInterval(function(){
 
 function validateForm(e){
     e.preventDefault()
-    if(e.target.value != null){
+    if(e.target.search.value != ""){
         query = e.target.search.value;
         search_params.set('q', query);
         url.search = search_params.toString();
         url.toString();
         loadDoc()
+    }else{
+        root.innerHTML = '<div class="progress-loader"><h1>OOPS!! No Results</h1></div>';
     }
+        
 }
 
 onscroll = function() {
