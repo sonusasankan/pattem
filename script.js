@@ -1,17 +1,14 @@
-
-var url = new URL("https://newsapi.org/v2/everything?q=bitcoin&apiKey=363d26dd3d664d199ca63adc371e22aa&pageSize=10&page=1");
+var page = 1;
+var pageSize = 10
+var query = "bitcoin";
+var url =  "";
 var query_string = url.search;
-console.log(query_string)
+var search_params = new URLSearchParams(query_string); 
 let root = document.getElementById("news")  
 
-function imageExists(url, callback) {
-    var img = new Image();
-    img.onload = function() { callback(true); };
-    img.onerror = function() { callback(false); };
-    img.src = url;
-}
 
 function loadDoc() {
+    url = new URL("https://newsapi.org/v2/everything?q="+query+"&apiKey=363d26dd3d664d199ca63adc371e22aa&pageSize="+pageSize+"&page="+page+"");
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
@@ -29,7 +26,7 @@ function loadDoc() {
             '</div>'+
             '</div>'
         }
-        root.innerHTML += output;
+        root.innerHTML = output;
 
         if(data.totalResults == 0){
             root.innerHTML = '<div class="progress-loader"><h1>OOPS!! No Results</h1></div>';
@@ -53,22 +50,20 @@ loadDoc();
 
 function validateForm(e){
     e.preventDefault()
-    let value = e.target.search.value;
-    search_params.set('q', value);
+    query = e.target.search.value;
+    search_params.set('q', query);
     url.search = search_params.toString();
     url.toString();
     loadDoc()
 }
 
-onscroll = function(ev) {
-    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-        var search_params = new URLSearchParams(query_string); 
-        var page = search_params.get('page');
-        search_params.set('page', parseInt(page) + 1);
+onscroll = function() {
+    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 400) {
+        page = page + 1;
+        search_params.set('page', page);
+        // search_params.set('pageSize', pageSize);
         url.search = search_params.toString();
         url.toString();
-        console.log(url)
         loadDoc()
-        // root.appendChild(node)
     }
 };
