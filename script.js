@@ -1,9 +1,7 @@
 
 var url = new URL("https://newsapi.org/v2/everything?q=bitcoin&apiKey=363d26dd3d664d199ca63adc371e22aa&pageSize=10&page=1");
 var query_string = url.search;
-var search_params = new URLSearchParams(query_string); 
-var pageSize = search_params.get('pageSize');
-
+console.log(query_string)
 let root = document.getElementById("news")  
 
 function imageExists(url, callback) {
@@ -31,7 +29,7 @@ function loadDoc() {
             '</div>'+
             '</div>'
         }
-        root.innerHTML = output;
+        root.innerHTML += output;
 
         if(data.totalResults == 0){
             root.innerHTML = '<div class="progress-loader"><h1>OOPS!! No Results</h1></div>';
@@ -64,9 +62,13 @@ function validateForm(e){
 
 onscroll = function(ev) {
     if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-        // search_params.set('pageSize', pageSize++);
-        // url.search = search_params.toString();
-        // url.toString();
-        // loadDoc()
+        var search_params = new URLSearchParams(query_string); 
+        var page = search_params.get('page');
+        search_params.set('page', parseInt(page) + 1);
+        url.search = search_params.toString();
+        url.toString();
+        console.log(url)
+        loadDoc()
+        // root.appendChild(node)
     }
 };
